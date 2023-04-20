@@ -1,72 +1,45 @@
-import { useState } from 'react';
 import css from './/ContactForm.module.css';
-import {
-   useFetchContactsQuery,
-   useAddContactMutation,
-} from 'redux/dataContacts';
+import { addContact } from 'redux/contacts/operations';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectAllContacts } from 'redux/contacts/selectors';
 
 const ContactForm = () => {
-   const [addContact] = useAddContactMutation();
-   const { data } = useFetchContactsQuery();
+   const dispatch = useDispatch();
+   const contactNames = useSelector(selectAllContacts).map(
+      contact => contact.name
+   );
 
-   const [name, setName] = useState('');
-   const [number, setNumber] = useState('');
-
-   function handelMessageChange(e) {
-      const { name, value } = e.currentTarget;
-      switch (name) {
-         case 'name':
-            setName(value);
-            break;
-         case 'number':
-            setNumber(value);
-            break;
-         default:
-            break;
-      }
-   }
-
-   function sentContact(e) {
+   const handleSubmit = e => {
       e.preventDefault();
-      const alreadyHas = data.map(contact => {
-         return contact.name;
-      });
-      if (alreadyHas.includes(name)) {
-         reset();
+      const form = e.currentTarget;
+      const name = form.elements.name.value;
+      const number = form.elements.number.value;
+
+      if (contactNames.includes(name)) {
          alert(name + ' is already in contacts');
+         form.reset();
          return;
       }
-      handelAddContact({ name, phone: number });
-      reset();
-   }
-
-   function reset() {
-      setName('');
-      setNumber('');
-   }
-
-   const handelAddContact = async values => {
-      try {
-         await addContact(values);
-      } catch (error) {
-         console.log('error', error);
+      if (name !== '' && number !== '') {
+         dispatch(addContact({ name, number }));
+         form.reset();
+         return;
       }
+      alert('Contact cannot be empty. Enter some text');
    };
 
    return (
       <div>
-         <form className={css.form__addContacts} onSubmit={sentContact}>
+         <form className={css.form__addContacts} onSubmit={handleSubmit}>
             <label className={css.form__label}>
                <p className={css.form__text}>Name</p>
                <input
                   className={css.form__input}
                   type="text"
-                  value={name}
                   name="name"
                   pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
                   title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
                   required
-                  onChange={handelMessageChange}
                />
             </label>
             <label className={css.form__label}>
@@ -74,12 +47,10 @@ const ContactForm = () => {
                <input
                   className={css.form__input}
                   type="tel"
-                  value={number}
                   name="number"
                   pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
                   title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
                   required
-                  onChange={handelMessageChange}
                />
             </label>
             <br />

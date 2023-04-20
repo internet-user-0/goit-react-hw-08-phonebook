@@ -5,28 +5,28 @@ import css from './sharedLayout.module.css';
 import styled from 'styled-components';
 
 import { useAuth } from 'hooks';
-import { logOut } from 'redux/auth/operations';
+import { logOut} from 'redux/auth/operations';
 
 const StyledLink = styled(NavLink)`
    &.active {
-      color: tomato;
+      color: blue;
    }
 `;
 
+
+
+
 export const SharedLayout = () => {
-   const { isLoggedIn } = useAuth();
+   const { isLoggedIn, user } = useAuth();
    const dispatch = useDispatch();
-   console.log(isLoggedIn);
+
    return (
       <div>
          <header className={css.container}>
             <nav>
                {isLoggedIn ? (
                   <div>
-                     <StyledLink to="/contacts" className={css.navLink}>
-                        контакты
-                     </StyledLink>
-                     {/* <StyledLink></StyledLink> */}
+                     <h4>{user.email}</h4>
                      <button type="button" onClick={() => dispatch(logOut())}>
                         log out
                      </button>
