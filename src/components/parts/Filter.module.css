@@ -1,10 +1,15 @@
+.label{
+   padding-left: 20px;
+   display: block;
+}
+
 .label__text {
    font-size: 20px;
    font-weight: bold;
+   margin: 0 0 10px 0 ;
 }
 
 .label__input {
-
    box-sizing: border-box;
    border-radius: 4px;
    height: 30px;
@@ -17,5 +22,6 @@
    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 .label__input:hover {
-   border: solid 2px #668dcd;
+   box-shadow: 0 1px 10px 3px #e5ebe2;
+   border: solid 2px #133602;
 }

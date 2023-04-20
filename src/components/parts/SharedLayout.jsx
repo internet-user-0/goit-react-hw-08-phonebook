@@ -9,7 +9,7 @@ import { logOut} from 'redux/auth/operations';
 
 const StyledLink = styled(NavLink)`
    &.active {
-      color: blue;
+      color: #92230f;
    }
 `;
 
@@ -25,28 +25,23 @@ export const SharedLayout = () => {
          <header className={css.container}>
             <nav>
                {isLoggedIn ? (
-                  <div>
-                     <h4>{user.email}</h4>
-                     <button type="button" onClick={() => dispatch(logOut())}>
+                  <div className={css.userOn}>
+                     <p className={css.userMail}>{user.email}</p>
+                     <button className={css.userButton} type="button" onClick={() => dispatch(logOut())}>
                         log out
                      </button>
                   </div>
                ) : (
-                  <div>
+                  <div className={css.userOff__container}>
+                     <p className={css.logo}>Contact book</p>
+                     <div className={css.userOff}>
                      <StyledLink to="/" className={css.navLink}>
-                        регистрация
+                     Register
                      </StyledLink>
                      <StyledLink to="/login" className={css.navLink}>
-                        войти
+                     Login
                      </StyledLink>
                   </div>
-               )}
-               {false && (
-                  <div>
-                     <p>добро пожаловать</p>
-                     <StyledLink to="/register" className={css.navLink}>
-                        выйти
-                     </StyledLink>
                   </div>
                )}
             </nav>

@@ -1,17 +1,54 @@
-.container{
+.container {
    padding: 20px;
-   border-bottom: 2px solid black;
-   margin-bottom: 20px;
+   background-color: #e5ebe2;
+   box-shadow: 0 1px 10px 3px rgba(0, 0, 0, 0.5);
 }
 
-.navLink{
+.navLink {
    color: #000000;
    font-size: 20px;
    font-weight: bold;
    text-decoration: none;
    padding: 5px;
-
 }
 
+.userOn {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
 
+.userMail {
+   font-size: 18px;
+   font-weight: bold;
+}
 
+.userButton {
+   background-color: #e5ebe2;
+   border: solid black 2px;
+   border-radius: 9%;
+   font-size: 12px;
+   font-weight: bold;
+   width: 60px;
+   height: 25px;
+}
+
+.userButton:hover {
+   background-color: #92230f;
+   color: #ebe9e2;
+}
+
+.userOff {
+   display: flex;
+   justify-content: flex-end;
+}
+
+.userOff__container {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+.logo {
+   font-size: 24px;
+   font-weight: bold;
+}

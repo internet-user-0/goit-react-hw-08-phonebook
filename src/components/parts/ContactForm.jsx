@@ -29,7 +29,8 @@ const ContactForm = () => {
    };
 
    return (
-      <div>
+      <div className={css.form}>
+         <h1 className={css.form__heading}>Phonebook</h1>
          <form className={css.form__addContacts} onSubmit={handleSubmit}>
             <label className={css.form__label}>
                <p className={css.form__text}>Name</p>

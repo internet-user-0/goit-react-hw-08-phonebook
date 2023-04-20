@@ -13,11 +13,11 @@ const ContactList = () => {
 
    useEffect(() => {
       dispatch(fetchContacts());
-   }, [dispatch ]);
+   }, [dispatch]);
 
    function changeFilter(e) {
       setFilter(e.currentTarget.value);
-   };
+   }
 
    const normalizeFilter = filter.toLowerCase();
 
@@ -29,13 +29,14 @@ const ContactList = () => {
 
    return (
       <>
+         <h2>Contacts</h2>
          <Filter value={filter} onChange={changeFilter} />
-         <ul>
+         <ul className={css.list}>
             {visibleContacts &&
                visibleContacts.map(({ id, name, number }) => {
                   return (
                      <li className={css.list__item} key={id}>
-                        {name}: {number}{' '}
+                        <p>{name}: {number}{' '}</p>
                         <button
                            className={css.list__btnDelete}
                            type="submit"
